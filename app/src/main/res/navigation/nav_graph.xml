@@ -5,6 +5,12 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/onboardingFragment">
 
+    <action
+        android:id="@+id/action_global_to_signIn"
+        app:destination="@id/signInFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
+
     <fragment
         android:id="@+id/onboardingFragment"
         android:name="com.panganiban.salosalo.ui.OnboardingFragment"
@@ -53,6 +59,9 @@
         <action
             android:id="@+id/action_home_to_search"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_home_to_profile"
+            app:destination="@id/profileFragment" />
     </fragment>
 
     <fragment
@@ -76,5 +85,11 @@
         android:name="com.panganiban.salosalo.ui.UploadFragment"
         android:label="Upload"
         tools:layout="@layout/fragment_upload" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.panganiban.salosalo.ui.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
 
 </navigation>

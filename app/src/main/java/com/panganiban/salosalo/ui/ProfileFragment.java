@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import com.google.firebase.auth.FirebaseAuth;
 import com.panganiban.salosalo.R;
 import com.panganiban.salosalo.databinding.FragmentProfileBinding;
 
@@ -39,7 +40,7 @@ public class ProfileFragment extends Fragment {
         });
 
         binding.btnLogout.setOnClickListener(v -> {
-            // In a real app, sign out of Firebase here
+            FirebaseAuth.getInstance().signOut();
             Navigation.findNavController(view).navigate(R.id.action_global_to_signIn);
         });
     }
