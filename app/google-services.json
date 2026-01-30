@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "97408456263",
+    "project_id": "salosalo-581bc",
+    "storage_bucket": "salosalo-581bc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97408456263:android:2c64ae2d48c7819c170362",
+        "android_client_info": {
+          "package_name": "com.panganiban.salosalo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlymbwW42zdDQ1wGxT4JlSXQBA0aNIAMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
