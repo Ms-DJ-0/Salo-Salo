@@ -41,7 +41,7 @@
             app:boxCornerRadiusBottomStart="30dp"
             app:boxCornerRadiusTopEnd="30dp"
             app:boxCornerRadiusTopStart="30dp"
-            app:startIconDrawable="@drawable/ic_person"
+            app:startIconDrawable="@drawable/person_icon"
             app:startIconGravity="center"
             app:startIconTint="#2E3E5C"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
