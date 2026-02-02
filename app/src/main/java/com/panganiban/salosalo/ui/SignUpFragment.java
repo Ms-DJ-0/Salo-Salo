@@ -1,7 +1,10 @@
 package com.panganiban.salosalo.ui;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,17 +43,65 @@ public class SignUpFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        
+
+        // 1. Initialize the Password Logic
+        setupPasswordValidation();
+
         binding.btnSignUp.setOnClickListener(v -> signUpUser());
-        
-        binding.tvSignIn.setOnClickListener(v -> 
-            Navigation.findNavController(view).popBackStack());
+
+        binding.tvSignIn.setOnClickListener(v ->
+                Navigation.findNavController(view).popBackStack());
+    }
+
+    private void setupPasswordValidation() {
+        // We still need colors for the TEXT, but not the image tint
+        int colorSuccess = Color.parseColor("#2ECC71"); // Green
+        int colorDefault = Color.parseColor("#9FA5C0"); // Gray
+
+        binding.etPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String password = s.toString();
+
+                // --- CHECK 1: Length >= 6 ---
+                if (password.length() >= 6) {
+                    // Just swap the image (No tinting needed)
+                    binding.ivCheckLength.setImageResource(R.drawable.checked_icon);
+                    binding.tvCheckLength.setTextColor(colorSuccess);
+                } else {
+                    // Revert image
+                    binding.ivCheckLength.setImageResource(R.drawable.unchecked_pw);
+                    binding.tvCheckLength.setTextColor(colorDefault);
+                }
+
+                // --- CHECK 2: Contains a Number ---
+                if (password.matches(".*\\d.*")) {
+                    binding.ivCheckNumber.setImageResource(R.drawable.checked_icon);
+                    binding.tvCheckNumber.setTextColor(colorSuccess);
+                } else {
+                    binding.ivCheckNumber.setImageResource(R.drawable.unchecked_pw);
+                    binding.tvCheckNumber.setTextColor(colorDefault);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
     }
 
     private void signUpUser() {
         String name = binding.etName.getText().toString().trim();
         String email = binding.etEmail.getText().toString().trim();
         String password = binding.etPassword.getText().toString().trim();
+
+        // Optional: Block signup if criteria aren't met
+        if (password.length() < 6 || !password.matches(".*\\d.*")) {
+            Toast.makeText(getContext(), "Password must be 6+ chars and include a number", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
